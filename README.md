@@ -21,6 +21,3 @@ draw graph on CRT or plotter.<br>
 
 Attractive Force is computed by using : Hooke's Law 
 Repulsive Forces are computed by using : Coulomb's Law 
-
-<h2>Output <h2> 
-
