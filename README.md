@@ -9,3 +9,15 @@ to produce crossing-free layouts for planar graphs
 
 
 ![alt text](https://github.com/svishrut93/Force-Directed-Graph-Drawing/blob/master/Examples%20of%20Force%20Directed%20Graphs.PNG)
+
+The file Graph2.py , implements the following preliminary algorithm for force directed graph drawing : 
+
+algorithm SPRING(G:graph);
+place vertices of G in random locations;
+repeat M times
+calculate the force on each vertex;
+move the vertex c4 ∗ (force on vertex)
+draw graph on CRT or plotter.
+
+<h2>Output <h2> 
+
