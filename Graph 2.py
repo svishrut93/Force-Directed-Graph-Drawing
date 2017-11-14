@@ -1,32 +1,12 @@
 # Force-Directed Graph Drawing
 
-import
+import Tkinter
 import random
 import math
 
-# d = [
-#     [.0, .3, .3, .0],
-#     [.3, .0, .3, .0],
-#     [.3, .3, .0, .3],
-#     [.0, .0, .3, .0]
-# ]
 
 d = []
 
-#
-# for i in xrange(nrows * ncols):
-#     ci = i % ncols
-#     ri = i / ncols
-#     dr = []
-#     for j in xrange(nrows * ncols):
-#         cj = j % ncols
-#         rj = j / ncols
-#         if ((ci == cj) and (ri == rj - 1 or ri == rj + 1)
-#             or (ri == rj and (ci == cj - 1 or ci == cj + 1))):
-#             dr.append(.1)
-#         else:
-#             dr.append(.0)
-#     d.append(dr)
 
 print "Enter file name you want to read from..."
 fname = raw_input()
@@ -47,11 +27,8 @@ def graph_input(nodes, edges, lists=[]):
         u = lists[i]
         v = lists[i + 1]
         print "i = ", i, "u = ", u, "v= ", v
-        # u,v= s.split()
-        # u = int(u)
-        # v = int(v)
-        # w = int(w)
-        adj_matrix[v][u] = adj_matrix[u][v] = 1
+
+        adj_matrix[v][u] = adj_matrix[u][v] = 0.1
 
     print "adjacency matrix is : "
     # print the adjacency matrix
@@ -65,7 +42,7 @@ with open(fname+".txt") as f:
 
 lines = [int(i) for i in lines]
 
-print "pppp"
+
 print lines
 
 nodes = lines[0]
@@ -75,14 +52,6 @@ print "no of nodes = ",nodes
 print "no of edges = ",edges
 
 d = graph_input(nodes, edges,lines)
-
-
-
-# d  = [[0,0.1,0.1,0,0],
-#       [0.1,0,0,0,0],
-#       [0.1,0,0,0.1,0.1],
-#       [0,0,0.1,0,0],
-#       [0,0,0.1,0,0]]
 
 # mass
 alpha = 1.0
@@ -94,9 +63,9 @@ delta_t = .01
 
 m = len(d)
 
-root = Tkinter.Tk()
+root = Tkinter.Tk()           #tkinter for creating the front end window
 
-canvas = Tkinter.Canvas(root, width=2000, height=2000, background="blue")
+canvas = Tkinter.Canvas(root, width=2000, height=2000, background="#FFFFCC")     #creating canvas with given dimension
 canvas.pack()
 
 x = []
@@ -105,15 +74,19 @@ ids = []
 
 
 def move_oval(i):
-    newx = int(x[i][0] * 500)
-    newy = int(x[i][1] * 500)
-    canvas.coords(ids[i], newx - 5, newy - 5, newx + 5, newy + 5)
+    newx = int(x[i][0] * 500)  #coordinate of point = 500
+    newy = int(x[i][1] * 500)  #coordinate of point = 500
+    canvas.coords(ids[i], newx - 5, newy - 5, newx + 5, newy + 5)  #Adjusts every single point
 
+
+#creating a red dot on the canvas
+#http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/create_oval.html
 for i in xrange(m):
     xi = [random.random(), random.random()]
     x.append(xi)
     v.append([0.0, 0.0])
     id = canvas.create_oval(245, 245, 255, 255, fill="red")
+
     ids.append(id)
     move_oval(i)
 
@@ -129,13 +102,13 @@ def move_line(id, xi, xj):
 
 for i in xrange(m):
     for j in xrange(m):
-        if d[i][j] != 0:
+        if d[i][j] != 0:    #i.e the line an edge exists
             id = canvas.create_line(0, 0, 0, 0)
             lids.append(id)
             move_line(id, x[i], x[j])
 
 
-def Coulomb_force(xi, xj):
+def Coulomb_force(xi, xj):  #repulsive force
     dx = xj[0] - xi[0]
     dy = xj[1] - xi[1]
     ds2 = dx * dx + dy * dy
@@ -148,7 +121,7 @@ def Coulomb_force(xi, xj):
     return [-const * dx, -const * dy]
 
 
-def Hooke_force(xi, xj, dij):
+def Hooke_force(xi, xj, dij): #attractive force
     dx = xj[0] - xi[0]
     dy = xj[1] - xi[1]
     ds = math.sqrt(dx * dx + dy * dy)
@@ -163,8 +136,8 @@ def move():
         Fx = 0.0
         Fy = 0.0
         for j in xrange(m):
-            if j == 1:
-                continue
+            # if j == 1:
+            #     continue
             dij = d[i][j]
             Fij = 0.0
             if dij == 0.0:
