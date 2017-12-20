@@ -19,5 +19,12 @@ calculate the force on each vertex;<br>
 move the vertex c4 ∗ (force on vertex)<br>
 draw graph on CRT or plotter.<br>
 
-Attractive Force is computed by using : Hooke's Law 
-Repulsive Forces are computed by using : Coulomb's Law 
+Attractive Force is computed by using : Hooke's Law <br>
+Repulsive Forces are computed by using : Coulomb's Law <br> 
+
+
+Outputs<br> 
+
+![alt text](https://github.com/svishrut93/Force-Directed-Graph-Drawing/blob/master/Outputs/Output1.PNG)
+
+![alt text](https://github.com/svishrut93/Force-Directed-Graph-Drawing/blob/master/Outputs/Output2.PNG)
